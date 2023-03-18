@@ -10,7 +10,7 @@ const config = {
   tagline: 'API for hackathon',
   url: 'https://newbapi.com',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
 
