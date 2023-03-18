@@ -58,12 +58,12 @@ const config = {
           src: 'img/newbapi.png',
         },
         items: [
-          {
-            type: 'doc',
-            docId: 'intro',
-            position: 'left',
-            label: 'Tutorial',
-          },
+          // {
+          //   type: 'doc',
+          //   docId: 'intro',
+          //   position: 'left',
+          //   label: 'Documentation',
+          // },
           {
             href: 'https://github.com/NewbAPI-Project',
             label: 'GitHub',
