@@ -5,33 +5,212 @@ sidebar_position: 3
 # QR Code
 
 <!-- # QRcode Generator Documentation -->
-API version: `1.0`
+API version: `2.0`
+
 ## Introduction
-QRcodesvc is a powerful QRcode generator that can be used to generate high-quality QR codes for any use case. It is supports all major formats: PNG, PDF, EPS, and SVG. With just one endpoint, you can create a QR code with your desired format, design & size in seconds.
+Looking for a quick and easy way to integrate QR code functionality into your application? Look no further than our QR code API! With just a few simple API calls, you can generate and display QR codes with ease, allowing your users to quickly and easily scan and interact with your content. Our API is fast, reliable, and easy to use, making it the perfect choice for developers looking to add QR code functionality to their applications. So why wait? Try our QR code API today and take your application to the next level!
 
-<!-- 
-## API Limitation
-None -->
+#### Supported output file:
+- `.png`
+- `.pdf`
+- `.eps`
 
-### Price
-Newbapi offers three tiers of service: Basic, Pro, and Ultra.
+## API Endpoint
 
-|                          | Basic         | Pro         | Ultra            |
-| ------------------------ | ------------- | ----------- | -----------------|
-| Request                  | 1K / Month    | 24M / Month | $0.00000101 / use|
-| Rate Limit (Per second)  | 1             | 10          | 10               |
-| Price                    | Free          | $24.00      | Pay Per Use      |
+| Endpoint            	   | Method  | Description |
+| ------------------------ | --------| ------------|
+| `/api/v2/qr`  					 | `POST`  | Generate standard QR code|
+| `/api/v2/wifi`						 | `POST` | Generate WiFi QR code |
+| `/api/v2/sms`						 | `POST` | Generate SMS QR code |
+| `/api/v2/tel`						 | `POST` | Generate Telephone Number QR code |
+| `/api/v2/email`						 | `POST` | Generate Email QR code |
+| `/api/v2/event`						 | `POST` | Generate Calendar event QR code |
+| `/api/v2/vccard`						 | `POST` | Generate VC Card QR code |
+| `/api/v2/geo`						 | `POST` | Generate Geo QR code |
 
+## API Schemas
 
-Subscribe Here: [RapidAPI](https://rapidapi.com/newbAPIOfficial/api/qrcodesvc-qrcode-generator/pricing)
+### `data`
 
-## Endpoint Info
+##### Standard QR
+	
+Suitable for URL and Text
 
-List of available endpoint:
+- `data` (required) - String
 
-| Endpoint            	   | Method  | 
-| ------------------------ | --------| 
-| `api/v1/qrcodesvc/text`  | `POST`  | 
+```json
+"data": "Hello World"
+```
+
+##### Wifi QR
+
+- `type` (required) - String. Example: `WEP`, `WPA`,  `WPA2`, `WPA3`
+- `ssid` (required) - String. Example: `My home wifi`
+- `password` (optional) - String
+
+```json
+"data": {
+	"type": "WPA", // WEP
+	"ssid": "My Home Wifi",
+	"password": "password_wifi"
+}
+```
+
+##### SMS QR
+
+- `sms` (required) - String
+- `body` (required) - String
+
+```json
+"data": {
+	"sms": "092012312",
+	"body": "Hello This is me"
+}
+```
+
+##### Tel QR
+
+- `tel` (required) - String
+
+```json
+"data": {
+	"tel": "0292012312"
+}
+```
+
+##### Email
+
+- `mailto` (required) - String
+- `subject` (required) - String
+- `body` (required) - String
+- `cc` (optional) - String
+- `bcc` (optional) - String
+
+```json
+"data": {
+	"mailto": "jaironlanda@example.com",
+	"cc": "someone@example.com",
+	"bcc": "huhu@example.com",
+	"subject": "This subject",
+	"body": "my body"
+}
+```
+
+##### Calendar Event
+
+:::info
+
+Timezone: `UTC`. Date and Time Format: `Y-m-d H:M:S`
+
+:::
+
+- `summary` (required) - String
+- `date_start` (optional) - String.
+- `date_end` (optional) - String.
+- `location` (optional) - String
+- `description` (optional) - String
+
+```json
+"data": {
+	"summary": "My Life event",
+	"date_start": "2024-04-13 12:12:00",
+	"date_end": "2024-04-14 12:12:00",
+	"location": "Rmh saya",
+	"description": "my haus"
+}
+```
+
+##### VC Card
+
+- `firstname` (required) - String
+- `lastname` (optional) - String
+- `tel` (optional) - String
+- `email` (optional) - String
+
+```json
+"data": {
+	"firstname": "Jairon",
+	"lastname": "Landa",
+	"tel": "9201293121",
+	"email": "jaironlanda@example.com"
+}
+```
+
+##### Geo
+
+- `lat` (required) - String
+- `long` (required) - String
+
+```json
+"data": {
+	"lat": "19.80604815524197",
+	"long": "-155.53058872342245"
+}
+```
+
+### `config`
+
+QR Code configuration
+
+- `auto` (required) - Automatic detect Boolean: `true` or `false`
+
+```json
+"config": {
+	"auto": true,
+	"version": 1,
+	"error_correction": "M",
+	"box_size": 30,
+	"border": 4
+}
+```
+
+```bash
+
+{
+  "data": {
+    "summary": "My Life event",
+    "date_start": "2024-04-13 12:12:00",
+    "date_end": "2024-04-14 12:12:00",
+    "location": "Rmh saya",
+    "description": "my haus"
+  },
+  "config": {
+    "auto": true,
+    "version": 1,
+    "error_correction": "M",
+    "box_size": 30,
+    "border": 4
+  },
+  "design": {
+    "qr_colour": "#000000",
+    "bg_colour": "#ffffff"
+  },
+  "option": {
+    "file_type": "png",
+    "file_name": "myevent"
+  }
+}
+```
+
+## Exampe API Response
+
+The response will be returned as binary.
+
+```bash
+{
+  "access-control-allow-credentials": "true",
+  "access-control-allow-origin": "*",
+	...
+  "content-disposition": "attachment; filename=\"myqrcode.png\"",
+  "content-length": "5870",
+  "content-type": "image/png",
+	...
+  "server": "RapidAPI-1.2.8",
+  "strict-transport-security": "max-age=63072000",
+  "x-rapidapi-region": "AWS - ap-southeast-1",
+  "x-rapidapi-version": "1.2.8"
+}
+```
 
 
 ## API request body
