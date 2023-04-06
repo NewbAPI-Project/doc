@@ -10,6 +10,10 @@ API version: `2.0`
 ## Introduction
 Looking for a quick and easy way to integrate QR code functionality into your application? Look no further than our QR code API! With just a few simple API calls, you can generate and display QR codes with ease, allowing your users to quickly and easily scan and interact with your content. Our API is fast, reliable, and easy to use, making it the perfect choice for developers looking to add QR code functionality to their applications. So why wait? Try our QR code API today and take your application to the next level!
 
+<img src="../img/rapidapi.svg" width="150" />
+
+Link: [Rapid](https://rapidapi.com/newbAPIOfficial/api/qr-code-by-newbapi)
+
 #### Supported output file:
 - `.png`
 - `.pdf`
@@ -28,7 +32,7 @@ Looking for a quick and easy way to integrate QR code functionality into your ap
 | `/api/v2/vccard`						 | `POST` | Generate VC Card QR code |
 | `/api/v2/geo`						 | `POST` | Generate Geo QR code |
 
-## API Schemas
+## Schemas
 
 ### `data`
 
@@ -42,6 +46,29 @@ Suitable for URL and Text
 "data": "Hello World"
 ```
 
+##### Full Example `Standard`
+
+```json
+{
+    "data": "https://newbapi.com",
+    "config": {
+        "auto": true,
+        "version": 1,
+        "error_correction": "M",
+        "box_size": 30,
+        "border": 4
+    },
+    "design": {
+        "qr_colour": "#000000",
+        "bg_colour": "#ffffff"
+    },
+    "option": {
+        "file_type": "png",
+        "file_name": "myqrcode"
+    }
+}
+```
+
 ##### Wifi QR
 
 - `type` (required) - String. Example: `WEP`, `WPA`,  `WPA2`, `WPA3`
@@ -50,9 +77,36 @@ Suitable for URL and Text
 
 ```json
 "data": {
-	"type": "WPA", // WEP
+	"type": "WPA",
 	"ssid": "My Home Wifi",
 	"password": "password_wifi"
+}
+```
+
+##### Full Example `Wifi`
+
+```json
+{
+    "data": {
+        "type": "WPA",
+        "ssid": "mywifiname",
+        "password": "12345667"
+    },
+    "config": {
+        "auto": true,
+        "version": 1,
+        "error_correction": "M",
+        "box_size": 30,
+        "border": 4
+    },
+    "design": {
+        "qr_colour": "#000000",
+        "bg_colour": "#ffffff"
+    },
+    "option": {
+        "file_type": "png",
+        "file_name": "mywifi"
+    }
 }
 ```
 
@@ -68,6 +122,32 @@ Suitable for URL and Text
 }
 ```
 
+##### Full Example `SMS`
+
+```json
+{
+    "data": {
+        "sms": "8291283912",
+        "body": "mymessage"
+    },
+    "config": {
+        "auto": true,
+        "version": 1,
+        "error_correction": "M",
+        "box_size": 30,
+        "border": 4
+    },
+    "design": {
+        "qr_colour": "#000000",
+        "bg_colour": "#ffffff"
+    },
+    "option": {
+        "file_type": "png",
+        "file_name": "smsqr"
+    }
+}
+```
+
 ##### Tel QR
 
 - `tel` (required) - String
@@ -75,6 +155,31 @@ Suitable for URL and Text
 ```json
 "data": {
 	"tel": "0292012312"
+}
+```
+
+##### Full Example `Tel`
+
+```json
+{
+    "data": {
+        "tel": "92839238129"
+    },
+    "config": {
+        "auto": true,
+        "version": 1,
+        "error_correction": "M",
+        "box_size": 30,
+        "border": 4
+    },
+    "design": {
+        "qr_colour": "#000000",
+        "bg_colour": "#ffffff"
+    },
+    "option": {
+        "file_type": "png",
+        "file_name": "mytel"
+    }
 }
 ```
 
@@ -96,11 +201,41 @@ Suitable for URL and Text
 }
 ```
 
+##### Full Example `Email`
+
+```json
+{
+    "data": {
+        "mailto": "jaironlanda@example.com",
+        "subject": "This is QRcode email",
+        "cc": "someone@example.com",
+        "bcc": "huhu@example.com",
+        "body": "Hi newbapi.com!"
+    },
+    "config": {
+        "auto": true,
+        "version": 1,
+        "error_correction": "M",
+        "box_size": 30,
+        "border": 4
+    },
+    "design": {
+        "qr_colour": "#000000",
+        "bg_colour": "#ffffff"
+    },
+    "option": {
+        "file_type": "png",
+        "file_name": "myemail"
+    }
+}
+```
+
 ##### Calendar Event
 
 :::info
 
-Timezone: `UTC`. Date and Time Format: `Y-m-d H:M:S`
+- Timezone: `UTC`
+- Date and Time Format: `Y-m-d H:M:S`
 
 :::
 
@@ -115,8 +250,37 @@ Timezone: `UTC`. Date and Time Format: `Y-m-d H:M:S`
 	"summary": "My Life event",
 	"date_start": "2024-04-13 12:12:00",
 	"date_end": "2024-04-14 12:12:00",
-	"location": "Rmh saya",
-	"description": "my haus"
+	"location": "Singapore",
+	"description": "QR code Party"
+}
+```
+
+##### Full Example `Calendar Event`
+
+```json
+{
+    "data": {
+        "summary": "My Qr Code Party!",
+        "date_start": "2023-04-04 12:30:00",
+        "date_end": "2023-04-05 12:30:00",
+        "location": "Singapore",
+        "description": "QR code Party"
+    },
+    "config": {
+        "auto": true,
+        "version": 1,
+        "error_correction": "M",
+        "box_size": 30,
+        "border": 4
+    },
+    "design": {
+        "qr_colour": "#000000",
+        "bg_colour": "#ffffff"
+    },
+    "option": {
+        "file_type": "png",
+        "file_name": "myevent"
+    }
 }
 ```
 
@@ -136,6 +300,34 @@ Timezone: `UTC`. Date and Time Format: `Y-m-d H:M:S`
 }
 ```
 
+##### Full Example `VC Card`
+
+```json
+{
+    "data": {
+        "firstname": "Jairon",
+        "lastname": "Landa",
+        "tel": "89212312",
+        "email": "jaironlanda@example.com"
+    },
+    "config": {
+        "auto": true,
+        "version": 1,
+        "error_correction": "M",
+        "box_size": 30,
+        "border": 4
+    },
+    "design": {
+        "qr_colour": "#000000",
+        "bg_colour": "#ffffff"
+    },
+    "option": {
+        "file_type": "png",
+        "file_name": "myvccard"
+    }
+}
+```
+
 ##### Geo
 
 - `lat` (required) - String
@@ -148,11 +340,41 @@ Timezone: `UTC`. Date and Time Format: `Y-m-d H:M:S`
 }
 ```
 
+##### Full Example `Geo`
+
+```json
+{
+    "data": {
+        "lat": "19.80604815524197",
+        "long": "-155.53058872342245"
+    },
+    "config": {
+        "auto": true,
+        "version": 1,
+        "error_correction": "M",
+        "box_size": 30,
+        "border": 4
+    },
+    "design": {
+        "qr_colour": "#000000",
+        "bg_colour": "#ffffff"
+    },
+    "option": {
+        "file_type": "png",
+        "file_name": "mygeo"
+    }
+}
+```
+
 ### `config`
 
 QR Code configuration
 
-- `auto` (required) - Automatic detect Boolean: `true` or `false`
+- `auto` (required) - Boolean: `true` or `false`. Default: `true`
+- `version` (required) - Integer: `1` to `40`
+- `error_correction` (required) String: `L`, `M`, `Q`, and `H`. Default: `M`
+- `box_size` (required) - Integer - How many Pixels each "box" of the QR code is.
+- `border` (required) - Integer - How many boxes thick the border should be. Default: `4` 
 
 ```json
 "config": {
@@ -164,35 +386,34 @@ QR Code configuration
 }
 ```
 
-```bash
+### `design`
 
-{
-  "data": {
-    "summary": "My Life event",
-    "date_start": "2024-04-13 12:12:00",
-    "date_end": "2024-04-14 12:12:00",
-    "location": "Rmh saya",
-    "description": "my haus"
-  },
-  "config": {
-    "auto": true,
-    "version": 1,
-    "error_correction": "M",
-    "box_size": 30,
-    "border": 4
-  },
-  "design": {
+Colour code is hex color. Example `#000000`
+
+- `qr_colour` (required) - String
+- `bg_colour` (required) - String
+
+
+```json
+"design": {
     "qr_colour": "#000000",
     "bg_colour": "#ffffff"
-  },
+  }
+```
+
+### `option`
+
+- `file_type` (required) - String. Supported file type: `png`, `pdf`, and `eps`
+- `file_name` (required) - String.
+
+```json
   "option": {
     "file_type": "png",
     "file_name": "myevent"
   }
-}
 ```
 
-## Exampe API Response
+## Response
 
 The response will be returned as binary.
 
@@ -212,248 +433,48 @@ The response will be returned as binary.
 }
 ```
 
+## Example (JavaScript - Fetch)
 
-## API request body
+```javascript
+const data = {
+  data: "https://newbapi.com",
+  config: {
+    auto: true,
+    version: 1,
+    error_correction: "M",
+    box_size: 30,
+    border: 4
+  },
+  design: {
+    qr_colour: "#000000",
+    bg_colour: "#ffffff"
+  },
+  option: {
+    file_type: "png",
+    file_name: "myqrcode"
+  }
+};
 
-
-| Parameter / Query | Type         | Default | Description      | Example
-| ----------------- | ------------ | --------| ---------------- | ---------------------------
-| data              | `string`     | `none`  | Qr code data     | `https:\\jaironlanda.com` or `this is normal text`
-
-
-### Request body `config`
-
-| Parameter / Query | Type         | Default | Description      | Example
-| ----------------- | ------------ | --------| ---------------- | ----------
-| auto              | `boolean`     | `true`  | Generate qr code with default config. Default Config: `"version": 1`, `"error_correction": "M"`, `"box_size": 10`, `"border": 4` | -
-| version    | `integer`    | `1` | Supported qr code version: `1` until `40` | -
-| error_correction  | `string`     | `'M'`   | Error correction config: `L`, `M` (default), `Q`, and `H` | -
-| box_size| `integer`      | `10`  | Minimum: `10`, Maximum: `100` | -
-| border  | `integer`      | `4`  | Minimum: `4`| -
-
-#### Example #1:
-
-Generate qr code with config `"auto": true`. Parameter `version`, `error_correction`, `box_size`, and `border` is not require.
+fetch(url, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+})
+.then(response => {
+  const fileName = response.headers.get('content-disposition').split('filename=')[1];
+  return response.blob().then(blob => {
+    const url = window.URL.createObjectURL(new Blob([blob]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', fileName);
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode.removeChild(link);
+  });
+})
+.catch(error => {
+  // handle network errors
+});
 ```
-{
-    "data": "jaironlanda.com",
-    "config": {
-        "auto": true
-    },
-    "option": {
-        "file_type": "png"
-    }
-}
-```
-> Note: `design` parameter is optional. Default color is black and white.
-
-#### Example #2:
-To generate qr code with custom config set `auto` parameter to `false`.
-
-```
-{
-    "data": "jaironlanda.com",
-    "config": {
-        "auto": false,
-        "version": 20,
-        "error_correction": "L",
-        "box_size": 50,
-        "border": 10
-    },
-    "option": {
-        "file_type": "png"
-    }
-}
-```
-> Note: `design` parameter is optional. Default color is black and white.
-
-### Request body `design`
-
-> Note: Support color format `Hex color` only. More info [here](https://www.color-hex.com/)
-
-| Parameter / Query | Type         | Default | Description      | Example
-| ----------------- | ------------ | --------| ---------------- | ----------
-| qr_colour         | `string`     | `#000000`  | Qr code color, default is black color or `#000000` | -
-| bg_colour    		| `string`    | `#ffffff` | Background for qr code, default is white color or `#ffffff` | -
-
-#### Example #3:
-Generate qr code with custom color and auto config.
-```
-{
-    "data": "jaironlanda.com",
-    "config": {
-        "auto": true
-    },
-    "design": {
-        "qr_colour": "#f69273",
-        "bg_colour": "#cc0000"
-    },
-    "option": {
-        "file_type": "png"
-    }
-}
-```
-#### Example #4:
-Generate qr code with custom color and manual config.
-```
-{
-    "data": "jaironlanda.com",
-    "config": {
-       "auto": false,
-        "version": 20,
-        "error_correction": "L",
-        "box_size": 50,
-        "border": 10
-    },
-    "design": {
-        "qr_colour": "#f69273",
-        "bg_colour": "#cc0000"
-    },
-    "option": {
-        "file_type": "png"
-    }
-}
-```
-
-### Request body `option`
-
-| Parameter / Query | Type         | Default | Description      | Example
-| ----------------- | ------------ | --------| ---------------- | ----------
-| file_type              | `string`     | `png`  | support file type: `png`, `pdf`, `eps`, and `svg`| -
-| file_name    | `string`    | `none` | if value is none, file name will randomly generate | -
-
-#### Example #5:
-Generate qr code with `pdf` format. Supported file type: `png`, `pdf`, `eps`, and `svg`
-```
-{
-    "data": "jaironlanda.com",
-    "config": {
-        "auto": true
-    },
-    "option": {
-        "file_type": "pdf"
-    }
-}
-```
-
-#### Example #5:
-Generate qr code with `pdf` file type and manual config setup.
-```
-{
-    "data": "jaironlanda.com",
-    "config": {
-        "auto": false,
-		"version": 20,
-        "error_correction": "L",
-        "box_size": 50,
-        "border": 10
-    },
-    "design": {
-        "qr_colour": "#f69273",
-        "bg_colour": "#cc0000"
-    },
-    "option": {
-        "file_type": "pdf",
-		"file_name": "this is my qrcode"
-    }
-}
-```
-
-### Schema
-
-Schema for API request: 
-```
-{
-	"title": "QrText",
-	"required": [
-		"config",
-		"option"
-	],
-	"type": "object",
-	"properties": {
-		"data": {
-			"title": "Data",
-			"type": "string",
-			"default": "jaironlanda.com"
-		},
-		"config": {
-			"title": "QrConfig",
-			"type": "object",
-			"properties": {
-				"auto": {
-					"title": "Auto",
-					"type": "boolean",
-					"default": true
-				},
-				"version": {
-					"title": "Version",
-					"type": "integer",
-					"default": 1
-				},
-				"error_correction": {
-					"title": "Error Correction",
-					"type": "string",
-					"default": "M"
-				},
-				"box_size": {
-					"title": "QR code Box Size minium is 10",
-					"maximum": 100,
-					"minimum": 10,
-					"type": "integer",
-					"default": 30
-				},
-				"border": {
-					"title": "Border",
-					"type": "integer",
-					"default": 4
-				}
-			}
-		},
-		"design": {
-			"title": "QrDesign",
-			"type": "object",
-			"properties": {
-				"qr_colour": {
-					"title": "Qr Colour",
-					"type": "string",
-					"default": "#000000"
-				},
-				"bg_colour": {
-					"title": "Bg Colour",
-					"type": "string",
-					"default": "#ffffff"
-				}
-			}
-		},
-		"option": {
-			"title": "QrOption",
-			"type": "object",
-			"properties": {
-				"file_type": {
-					"title": "File Type",
-					"type": "string",
-					"default": "png"
-				},
-				"file_name": {
-					"title": "File Name",
-					"type": "string"
-				}
-			}
-		}
-	}
-}
-```
-## API response
-
-```
-....
-"content-disposition":"attachment; filename*=utf-8''<file-name-here>.<file-format>"
-"content-type":"<content type>"
-....
-```
-
-List of `content-type`:
-- PDF: `application/pdf`
-- EPS: `application/postscript`
-- PNG:  `image/png`
-- SVG: `image/svg+xml`
