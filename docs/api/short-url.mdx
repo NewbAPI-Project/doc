@@ -1,0 +1,459 @@
+---
+sidebar_position: 1
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+# Short URL
+
+API version: `1.0`
+
+## Introduction
+
+Are you looking to build your next project, whether it's a personal project or your own SaaS? Look no further than Short API service!
+With Short API, you can easily create and manage your own URL shortening service, providing a powerful tool for sharing and tracking links. Our API is simple to integrate, making it the perfect solution for developers of all levels.
+
+Whether you're building a small personal project or a large-scale SaaS, Short API has the scalability and flexibility to meet your needs. With reliable uptime and lightning-fast response times, you can trust our API to keep your service running smoothly.
+
+<img src="../img/rapidapi.svg" width="150" />
+
+Link: [Rapid](https://rapidapi.com/newbAPIOfficial/api/short-url-by-newbapi)
+
+## API Endpoint
+
+| Endpoint            	   | Method  | Description |
+| ------------------------ | --------| ------------|
+| `/api/v1/short/`  					 | `POST`  | Generates a short URL.|
+| `/api/v1/statistics/{uuid}`				| `GET` | Retrieves the total visitor count for the given `UUID`.|
+| `/api/v1/statistics/query/{uuid}`	| `GET` | Retrieves the total visitor count for the given `UUID` within a date range. |
+| `/api/v1/statistics/agent/{uuid}`	| `GET` | Retrieves the visitor user agent for a given `UUID`.|
+| `/api/v1/statistics/{timeline}/{uuid}`		| `GET` | Retrieves the total visitor count based on the given timeline and `UUID`. |
+
+## Base URL
+
+```bash
+  https://short-url-by-newbapi.p.rapidapi.com
+```
+
+## Schemas
+
+### Generate ShortURL
+
+- `url` (required) - String
+
+
+#### Example
+
+<Tabs>
+<TabItem value="curl" label="cURL">
+
+```bash
+curl --request POST \
+	--url https://short-url-by-newbapi.p.rapidapi.com/api/v1/short/ \
+	--header 'X-RapidAPI-Host: short-url-by-newbapi.p.rapidapi.com' \
+	--header 'X-RapidAPI-Key: <RAPIDAPI_KEY>' \
+	--header 'content-type: application/json' \
+	--data '{
+    "url": "https://jaironlanda.com"
+}'
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript (Fetch)">
+
+```js
+const options = {
+	method: 'POST',
+	headers: {
+		'content-type': 'application/json',
+		'X-RapidAPI-Key': '<RAPIDAPI_KEY>',
+		'X-RapidAPI-Host': 'short-url-by-newbapi.p.rapidapi.com'
+	},
+	body: '{"url":"https://jaironlanda.com"}'
+};
+
+fetch('https://short-url-by-newbapi.p.rapidapi.com/api/v1/short/', options)
+	.then(response => response.json())
+	.then(response => console.log(response))
+	.catch(err => console.error(err));
+```
+
+</TabItem>
+</Tabs>
+
+
+#### Response
+
+##### Attributes
+
+- `short_url_uuid` (String)
+	-	A unique ID for the short URL.
+- `created_at`
+	- The date and time when the short URL was generated. Timezone: `UTC`.
+- `updated_at`
+	-	The date and time when the short URL was last updated. Timezone: `UTC`.
+- `url`
+	- The URL that needs to be shortened.
+- `short_url`
+	- The shortened URL that is the output.
+- `short_url_domain`
+	- The short URL with the official domain name.
+- `is_active`
+	-	The status of the short URL. If the value is false, it means that the URL is not available, blocked, or banned.
+
+```json
+{
+  "short_url_uuid":"2a33a6d0-637f-4189-b0fc-6cce1b928169",
+  "created_at": "2023-04-16T04:57:10.944096+00:00",
+  "updated_at": "2023-04-16T04:57:10.944107+00:00",
+  "url": "https://jaironlanda.com",
+  "short_url": "16yikm5",
+  "short_url_domain": "https://qrlyf.link/16yikm5",
+  "is_active": true
+}
+```
+
+### Statistics
+
+#### 👉🏼 Total visitor
+
+- `uuid` (required) - String
+
+<Tabs>
+<TabItem value="curl" label="cURL">
+
+```bash
+curl --request GET \
+	--url https://short-url-by-newbapi.p.rapidapi.com/api/v1/statistics/<UUID> \
+	--header 'X-RapidAPI-Host: short-url-by-newbapi.p.rapidapi.com' \
+	--header 'X-RapidAPI-Key: <RAPIDAPI_KEY>'
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript (Fetch)">
+
+```js
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '<RAPIDAPI_URL>',
+		'X-RapidAPI-Host': 'short-url-by-newbapi.p.rapidapi.com'
+	}
+};
+
+fetch('https://short-url-by-newbapi.p.rapidapi.com/api/v1/statistics/<UUID>', options)
+	.then(response => response.json())
+	.then(response => console.log(response))
+	.catch(err => console.error(err));
+```
+
+</TabItem>
+</Tabs>
+
+#### Response
+
+##### Attributes
+
+- `total_visits`
+	-	The total number of visitors who have opened or clicked the link.
+
+
+```json
+{
+  "total_visits": 1
+}
+```
+#### 👉🏼 Total visit with visitor agent data
+
+- `uuid` (required) - String
+
+##### Example
+
+
+<Tabs>
+<TabItem value="curl" label="cURL">
+
+```bash
+curl --request GET \
+	--url https://short-url-by-newbapi.p.rapidapi.com/api/v1/statistics/agent/<UUID> \
+	--header 'X-RapidAPI-Host: short-url-by-newbapi.p.rapidapi.com' \
+	--header 'X-RapidAPI-Key: <RAPIDAPI_KEY>'
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript (Fetch)">
+
+```js
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '<RAPIDAPI_KEY>',
+		'X-RapidAPI-Host': 'short-url-by-newbapi.p.rapidapi.com'
+	}
+};
+
+fetch('https://short-url-by-newbapi.p.rapidapi.com/api/v1/statistics/agent/<UUID>', options)
+	.then(response => response.json())
+	.then(response => console.log(response))
+	.catch(err => console.error(err));
+```
+
+</TabItem>
+</Tabs>
+
+##### Response
+
+##### Attributes
+
+- `total_visits`
+	-	The total number of visitors who have opened or clicked the link.
+
+- `agent` (list)
+	-	The visitor agent data when the user opened or clicked the website.
+	- `created_at`
+		-	The date and time when the user opened or clicked the link. Timezone: `UTC`
+	- `user_agent`
+		- The raw user agent data.
+	- `browser_agent`
+		-	The browser that the user is using.
+	- `os_agent`
+		-	The operating system that the user is using.
+	-	`device_agent`
+		- The device that the user is using.
+
+```json
+{
+  "total_visits": 3,
+  "agent": [
+    {
+      "created_at": "2023-04-11T14:49:48.792167+00:00",
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36",
+      "browser_agent": "Chrome",
+      "os_agent": "Mac OS X",
+      "device_agent": "Mac"
+    },
+    {
+      "created_at": "2023-04-12T14:39:22.320138+00:00",
+      "user_agent": "Mozilla/5.0 (Linux; Android 11; RMX3511) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Mobile Safari/537.36",
+      "browser_agent": "Chrome Mobile",
+      "os_agent": "Android",
+      "device_agent": "Oppo RMX3511"
+    },
+    {
+      "created_at": "2023-04-15T08:53:58.158906+00:00",
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
+      "browser_agent": "Chrome",
+      "os_agent": "Mac OS X",
+      "device_agent": "Mac"
+    }
+  ]
+}
+```
+
+#### 👉🏼 Total visit query
+
+- `uuid` (required) - String
+- `from_date` (required) - String. Format: `Y-m-d`. Example: `2023-04-01`
+- `to_date` (required) - String. Format: `Y-m-d`. Example: `2023-04-01`
+
+##### Example
+
+
+<Tabs>
+<TabItem value="curl" label="cURL">
+
+```bash
+curl --request GET \
+  --url 'https://short-url-by-newbapi.p.rapidapi.com/api/v1/statistics/query/<UUID>?from_date=<FROM_DATE>&to_date=<TO_DATE>' \
+  --header 'X-RapidAPI-Host: short-url-by-newbapi.p.rapidapi.com' \
+  --header 'X-RapidAPI-Key: <RAPIDAPI_KEY>'
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript (Fetch)">
+
+```js
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '<RAPIDAPI_KEY>',
+		'X-RapidAPI-Host': 'short-url-by-newbapi.p.rapidapi.com'
+	}
+};
+
+fetch('https://short-url-by-newbapi.p.rapidapi.com/api/v1/statistics/query/<UUID>?from_date=<FROM_DATE>&to_date=<TO_DATE>', options)
+	.then(response => response.json())
+	.then(response => console.log(response))
+	.catch(err => console.error(err));
+```
+
+</TabItem>
+</Tabs>
+
+##### Response
+
+- `total_visits`
+	-	The total number of visitors who have opened or clicked the link.
+
+```json
+{
+  "total_visits": 1
+}
+```
+
+#### 👉🏼 Total visit based on timeline
+
+- `uuid` (required) - String
+- `timeline` (required) - String
+	-	latest
+		- Retrieves the latest total visitor.
+	-	`day`
+		- Retrieves the total visitor for the day.
+	-	`week`
+		- Retrieves the total visitor for the week.
+	-	`month`
+		- Retrieves the total visitor for the month.
+	-	`year`
+		- Retrieves the total visitor for the year.
+
+
+##### Example
+
+
+<Tabs>
+<TabItem value="curl" label="cURL">
+
+```bash
+curl --request GET \
+	--url https://short-url-by-newbapi.p.rapidapi.com/api/v1/statistics/<TIMELINE>/<UUID> \
+	--header 'X-RapidAPI-Host: short-url-by-newbapi.p.rapidapi.com' \
+	--header 'X-RapidAPI-Key: <RAPIDAPI_KEY>'
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript (Fetch)">
+
+```js
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '<RAPIDAPI_KEY>',
+		'X-RapidAPI-Host': 'short-url-by-newbapi.p.rapidapi.com'
+	}
+};
+
+fetch('https://short-url-by-newbapi.p.rapidapi.com/api/v1/statistics/<TIMELINE>/<UUID>', options)
+	.then(response => response.json())
+	.then(response => console.log(response))
+	.catch(err => console.error(err));
+```
+
+</TabItem>
+</Tabs>
+
+##### Response
+
+> Return `list`
+
+- `timeline`
+	-	The date and time timeline. Timezone: `UTC`
+-	`total_visits`
+	-	The total number of visitors who have opened or clicked the link.
+
+##### Example `latest`
+
+```json
+[
+  {
+    "timeline": "2023-04-15T00:00:00+00:00",
+    "total_visits": 1
+  }
+]
+```
+
+##### Example `day`
+
+```json
+[
+  {
+    "timeline": "2023-04-01T00:00:00+00:00",
+    "total_visits": 10
+  },
+	{
+    "timeline": "2023-04-02T00:00:00+00:00",
+    "total_visits": 1
+  },
+	...
+]
+```
+
+##### Example `week`
+
+```json
+[
+	{
+    "timeline": "2023-04-03T00:00:00+00:00",
+    "total_visits": 10
+  },
+  {
+    "timeline": "2023-04-10T00:00:00+00:00",
+    "total_visits": 10
+  },
+	{
+    "timeline": "2023-04-17T00:00:00+00:00",
+    "total_visits": 23
+  },
+	{
+    "timeline": "2023-04-24T00:00:00+00:00",
+    "total_visits": 23
+  }
+]
+```
+
+##### Example `month`
+
+```json
+[
+	{
+    "timeline": "2023-04-01T00:00:00+00:00",
+    "total_visits": 10
+  },
+  {
+    "timeline": "2023-05-01T00:00:00+00:00",
+    "total_visits": 10
+  },
+	{
+    "timeline": "2023-06-01T00:00:00+00:00",
+    "total_visits": 23
+  },
+	{
+    "timeline": "2023-07-01T00:00:00+00:00",
+    "total_visits": 23
+  }
+]
+```
+
+##### Example `year`
+
+```json
+[
+	{
+    "timeline": "2022-01-01T00:00:00+00:00",
+    "total_visits": 1110
+  },
+  {
+    "timeline": "2023-01-01T00:00:00+00:00",
+    "total_visits": 1110
+  },
+	{
+    "timeline": "2024-01-01T00:00:00+00:00",
+    "total_visits": 2311
+  },
+	{
+    "timeline": "2025-01-01T00:00:00+00:00",
+    "total_visits": 2113
+  }
+]
+```
